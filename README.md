@@ -1,2 +1,2 @@
-# lexon
+# lex:on
 Smart Legal Agreements
