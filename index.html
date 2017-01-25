@@ -1,1 +1,187 @@
-hello world
+<!doctype html>
+<html>
+<head>
+    <title>Lexon</title>
+</head>
+<body style="margin:10%">
+<style>
+    body    { color: #0f0000;
+        background-color: ivory;
+        font-family: sans-serif;
+        margin: 0 !important;
+        font-size: 1.2em; }
+    h1      { font-size: 2.5em;
+        color: #fffcf0;
+        text-shadow: 2px 2px 2px rgba(255,255,255,0.4),
+        -1px -1px 0 rgba(0,0,0,0.5);
+        background-color: darkgoldenrod;
+        border-bottom: 1px solid;
+        margin: 0;
+        padding-left: 10%;
+        height: 2em;
+        line-height: 2em;
+        vertical-align: middle;
+        box-shadow: inset -3px -3px 3px rgba(0, 0, 0, .4);
+        background: linear-gradient(darkgoldenrod, #98660b); }
+    h3      { margin-top: 3em; }
+    pre     { font-family: sans-serif; }
+    .box    { font-family: sans-serif;
+        color: black;
+        background: darkgoldenrod;
+        background: linear-gradient(darkgoldenrod, #98660b);
+        white-space: pre;
+        padding: 0;
+        margin: 2em 0em 2em 0em;
+        box-shadow: inset -2px -2px 2px rgba(0, 0, 0, .4),
+        inset 2px 2px 2px rgba(255, 255, 255, .4); }
+    .boxcap { font-size: 1.3em;
+        color: #fcfcd8;
+        text-shadow: 1px 1px 1px rgba(255,255,255,0.4),
+        -1px -1px 0 rgba(0,0,0,0.5);
+        margin: 0 0 0 1em;
+        padding 0; }
+    hr      { display: none;
+        margin: 0;
+        padding: 0;
+        height: 1px;
+        line-height: 1px;
+        border: 0;
+        width: 100%;
+        color: goldenrod;
+        background-color: goldenrod; }
+    .text   { margin: 10% !important;
+        text-align: justify; }
+    .code   { color: black;
+        font-weight: 900;
+        background: white;
+        background: linear-gradient(white, #fcfcfe);
+        white-space: pre;
+        margin: 0;
+        padding: 2em; }
+    .lexon  { font-size: 0.85em;
+        font-weight: normal;
+        line-height: 1.2em; }
+    .legal  { font-family: serif;
+        font-weight: normal;
+        white-space: pre-wrap;
+        line-height: 1.3em; }
+    .sol   { font-family: monospace; }
+</style>
+
+
+<h1>Lexon</h1>
+
+<div class=text>
+
+    <h3>Lexon is a contract programming language for lawyers.</h3>
+    <p>Lexon scripts are compiled, in parallel, into legal English language contracts and blockchain smart contracts.</p>
+    <p>Smart contracts are programs that can move money and resolve automatically.
+        They don't need notaries, judges or attorneys, neither on the happy path nor to
+        resolve edge cases or when the parties disagree about what should happen.</p>
+    <p>The English text describes precisely what the blockchain contract does. It
+        allows for the smart contract program to be understable by non-programmers and
+        to reason about whether it is legal. These are major roadblocks for the adoption
+        of smart contracts.</p>
+    <p>The English text also serves as description how to use the smart contract
+        that might be an offer for anyone to enter into, for example a crowd funding
+        offer. The blockchain makes sure that the letters of the contract are exactly
+        fulfilled.</p>
+
+    <h3>Example</h3>
+    <p>This is a partial example for a crowdfunding contract. The contract allows a benificiary to set a funding goal and deadline. When after the deadline the funding goal is met, the beneficiary will collect the money. Otherwise the funders can withdraw it. This example shows the withdrawal part.</p>
+
+    <div class=box>
+        <h4 class=boxcap>Lexon Script</h4> <hr>
+        <pre class="code lexon">ARTICLE: WITHDRAWAL.
+Comment: This article describes how collected funds can be withdrawn.
+
+SECTION 1: a funder wants to withdraw.
+IF WITHDRAWAL BY FUNDERS ALLOWED AND
+   REQUESTER'S BALANCE GREATER THAN 0, THEN:
+        TRANSFER REQUESTER'S BALANCE TO REQUESTER; AND
+        IF THIS TRANSFER SUCCEEDS, THEN:
+                RECORD: 'FUND TRANSFER', REQUESTER, BALANCE; AND
+                SET REQUESTER'S BALANCE 0.
+
+SECTION 2: the beneficiary wants to pick up the funds.
+IF REQUESTER IS BENEFICIARY, AND
+   SUM OF FUNDS GREATER OR EQUAL FUNDING GOAL, AND
+   FUNDING DEADLINE PAST, THEN:
+        TRANSFER AMOUNT RAISED TO BENEFICIARY; AND
+        IF THIS TRANSFER SUCCEEDS, THEN:
+                RECORD: 'FUND TRANSFER', BENEFICIARY, AMOUNT RAISED;
+        OR ELSE
+                ALLOW WITHDRAWAL BY FUNDERS.
+</pre>
+        <hr>
+    </div>
+
+    <p>The above Lexon script is compiled into the following two results.</p>
+    <p> This is the legal English text:</p>
+
+    <div class=box>
+        <h4 class=boxcap>Legal English</h4> <hr>
+        <pre class="code legal">ARTICLE: WITHDRAWAL.
+
+A PARTY CAN MAKE A WITHDRAWAL AS FOLLOWS.
+
+ON THE ETHEREUM MAINNET THE PARTY MAY INITIATE A DIGITALLY SIGNED 'CALL' FROM THE PARTY'S ETHEREUM MAINNET ACCOUNT, FOR A FEE, TO THIS CONTRACT'S SMART CONTRACT INSTANCE ON THE ETHEREUM MAINNET, SPECIFICALLY ITS FUNCTION 'withdrawal'.
+
+SECTION 1: a funder wants to withdraw.
+
+IF AT THE TIME WITHDRAWALS ARE ALLOWED AND
+IF THE REQUESTER'S BALANCE IS GREATER THAN ZERO, THEN
+THE REQUESTER'S BALANCE SHALL BE TRANSFERRED TO THE ACCOUNT OF THE REQUESTER ON THE ETHEREUM MAINNET IN THE CRYPTOCURRENCY ETHER.
+
+IF THIS TRANSFER SUCCEEDS, THEN:
+A PUBLIC 'FUND TRANSFER' ENTRY SHALL BE RECORDED ON THE ETHEREUM MAINNET RECEIPT LOG, RECORDING THE REQUESTER'S ACCOUNT NUMBER, AND THE BALANCE; AND
+THE REQUESTER'S BALANCE IS SET TO ZERO.
+
+SECTION 2: the beneficiary wants to pick up the funds.
+
+IF THE REQUESTER IS THE BENEFICIARY AND
+AND THE FUNDING GOAL HAS BEEN REACHED, THEN
+THE AMOUNT RAISED SHALL BE TRANSFERRED TO THE ACCOUNT OF THE BENEFICIARY ON THE ETHEREUM MAINNET, IN THE CRYPTOCURRENCY ETHER,
+
+IF THIS TRANSFER SUCCEEDS, THEN:
+A PUBLIC 'FUND TRANSFER' ENTRY SHALL BE RECORDED ON THE ETHEREUM MAINNET RECEIPT LOG, RECORDING THE BENEFICIARY'S ACCOUNT NUMBER, AND THE AMOUNT RAISED;
+OR ELSE, THE WITHDRAWAL BY FUNDERS IS ALLOWED FROM THEN ON.
+</pre>
+        <hr>
+    </div>
+
+    <p>And this is the smart contract to be executed on the blockchain, namely Solidity code for Ethereum.</p>
+
+    <div class=box>
+        <h4 class=boxcap>Smart Contract</h4> <hr>
+        <pre class="code sol">function withdrawal() {
+
+        if (funderWithdrawalsAllowed
+                && balanceOf[msg.sender] > 0) {
+                bool ok = msg.sender.send(balanceOf[msg.sender]);
+                if (ok) {
+                        FundTransfer(msg.sender, balanceOf[msg.sender], false);
+                        balanceOf[msg.sender] = 0;
+                }
+        }
+
+        if (beneficiary == msg.sender
+                && amountRaised >= fundingGoal
+                && now >= deadline) {
+                bool ok = beneficiary.send(amountRaised);
+                if (ok) {
+                        FundTransfer(beneficiary, amountRaised, false);
+             } else {
+                        funderWithdrawalsAllowed = true;
+                }
+        }
+}
+</pre>
+        <hr>
+    </div>
+
+    <p>NOTE: This example is a draft. The logic is not complete and not hardened.</p>
+
+
+    <p><small>Page optimized for viewing w/lynx 1.0</small></p>
+
